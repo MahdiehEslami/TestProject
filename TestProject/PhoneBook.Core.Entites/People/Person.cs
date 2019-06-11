@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PhoneBook.Core.Entites.Phones;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,6 +13,7 @@ namespace PhoneBook.Core.Entites.People
         public string Email { get; set; }
         public string  Address { get; set; }
         public string Image { get; set; }
+        public List<Phone> phones { get; set; }
         public List<PersonTag> tags { get; set; }
     }
 }
