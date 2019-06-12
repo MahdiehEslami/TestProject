@@ -24,6 +24,8 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Views\Tags\" />
+    <Folder Include="Views\Phones\" />
   </ItemGroup>
 
 </Project>

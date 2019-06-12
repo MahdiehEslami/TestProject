@@ -9,7 +9,7 @@ namespace Phonbook.Core.Contracts.Tags
     {
         Tag Get(int id);
         List<Tag> GetAll();
-        void Delete(int id);
+        //void Delete(int id);
         Tag Add(Tag tag);
     }
 }
