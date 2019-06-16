@@ -1,0 +1,19 @@
+﻿@model List<Tag>
+
+<h1>List of Tag</h1>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.TagId</td>
+            <td>@item.Title</td>
+        </tr>
+
+    }
+</table>
+<a asp-controller="Tag" asp-action="Add"><input type="button" class="table" value="Add Tag" style = "width: 100px;" /></a>
