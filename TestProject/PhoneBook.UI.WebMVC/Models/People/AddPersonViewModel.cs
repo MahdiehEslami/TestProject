@@ -32,6 +32,7 @@ namespace PhoneBook.UI.WebMVC.Models.People
     public class AddPersonDisplayViewModel:AddPersonViewModel
     {
         public List<Tag> TagForDisplay { get; set; }
+        public List<int> oldTag { get; set; } 
     }
 
     public class AddPersonSelectViewModel: AddPersonViewModel

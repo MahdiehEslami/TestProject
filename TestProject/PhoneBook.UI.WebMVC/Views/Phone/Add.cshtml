@@ -1,0 +1,18 @@
+﻿@model PhoneBook.UI.WebMVC.Models.Phones.AddPhoneViewModel
+
+<h1> Add a Phone for Prson : @Model.PersonId </h1>
+
+<form asp-controller="Phone" asp-action="Add" method="post">
+    <div class="d-flex">
+        <div class="form-group flex-grow-1">
+            <label asp-for="Number"></label>
+            <input type="text" asp-for="Number" class="form-control" maxlength="50" />
+            <span asp-validation-for="Number" class="text-danger"></span>
+        </div>
+        <div class="form-group flex-grow-1">
+            <label asp-for="Type"></label><br />
+            <select class="form-control" asp-for="Type" asp-items="@Model.PhoneTypes"></select>
+        </div>
+    </div>
+    <input type="submit" class="btn btn-primary" value="save" />
+</form>

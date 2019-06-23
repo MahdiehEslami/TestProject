@@ -1,0 +1,49 @@
+﻿@model Person
+
+<h1>Detail Of Person @Model.PersonId</h1>
+
+<div class="d-flex justify-content-lg-start">
+    <div class="border-left-danger">
+        @*data:[<media type>][;charset=<character set>][;base64],<data>*@
+        <img src="data:image/jpeg;base64, @Model.Image" alt="@Model.FirstName @Model.LastName" width="250" />
+    </div>
+    <div class="border-left-danger ml-4 p-2 text-lg">
+        <strong class="text-black-50 ">Full Name: </strong><span class="d-block mb-3">@Model.FirstName @Model.LastName</span>
+        <strong class="text-black-50">Email: </strong><span class="d-block mb-3">@Model.Email</span>
+        <strong class="text-black-50">Address: </strong><span class="d-block mb-3">@Model.Address</span>
+    </div>
+</div>
+<div class="mt-5">
+    <h2> Phones of person @Model.PersonId</h2>
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>Row</th>
+            <th>Type</th>
+            <th>Number</th>
+        </tr>
+        @if (Model.phones != null @*&& Model.phones.Count > 0*@)
+        {
+            @foreach (var item in Model.phones)
+            {
+                <tr>
+                    <td>@item.phoneId</td>
+                    <td>@item.PhoneType</td>
+                    <td>@item.phoneNumber</td>
+                </tr>
+
+            }
+
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">Don't Have Phones Number</td>
+            </tr>
+        }
+    </table>
+    <div class="d-flex justify-content-end">
+        <a class="btn btn-primary" asp-controller="Phone" asp-action="Add" asp-route-Id="@Model.PersonId">Insert</a>
+    </div>
+</div>
+
+

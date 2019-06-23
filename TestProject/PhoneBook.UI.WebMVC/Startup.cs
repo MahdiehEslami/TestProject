@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Phonbook.Core.Contracts.People;
+using Phonbook.Core.Contracts.Phones;
 using Phonbook.Core.Contracts.Tags;
 using Phonebook.DAL.EF;
 using Phonebook.DAL.EF.People;
+using Phonebook.DAL.EF.Phones;
 using Phonebook.DAL.EF.Tags;
 
 namespace PhoneBook.UI.WebMVC
@@ -24,6 +26,7 @@ namespace PhoneBook.UI.WebMVC
             services.AddDbContext<PhoneBookContext>();
             services.AddScoped<IPersonRepository, EfPersonRepository>();
             services.AddScoped<ITagRepository, EfTagRepository>();
+            services.AddScoped<IPhoneRepository, EfPhoneRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
