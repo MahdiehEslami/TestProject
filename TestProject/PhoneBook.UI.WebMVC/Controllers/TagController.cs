@@ -13,33 +13,43 @@ namespace PhoneBook.UI.WebMVC.Controllers
 {
     public class TagController : Controller
     {
-        private readonly ITagRepository Repo;
+        private readonly ITagRepository tagRepo;
 
         public TagController(ITagRepository tagRepository)
         {
-            Repo = tagRepository;
+            tagRepo = tagRepository;
         }
         public IActionResult List()
         {
-            List<Tag> tags = Repo.GetAll().ToList();
-            return View(tags);
+            List<Tag> Gettags = tagRepo.GetAll().ToList();
+            AddTagViewModel model = new AddTagViewModel
+            {
+                tags= Gettags
+            };
+            
+            return View(model);
         }
+
+
+        [HttpPost]
         public IActionResult Add(AddTagViewModel model)
         {
             if (ModelState.IsValid)
             {
-                Tag tags = new Tag
-                {
-                    Title = model.Title
-                };
                 if (model?.Title?.Length > 0)
                 {
-                    Repo.Add(tags);
-                return RedirectToAction("List");
+                    Tag tags = new Tag
+                    {
+                        Title = model.Title
+                    };
+                    tagRepo.Add(tags);
+                    return RedirectToAction("list");
                 }
+                
+             
             }
 
-                return View(model);
+            return View();
         }
     }
 }
