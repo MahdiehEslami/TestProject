@@ -12,6 +12,7 @@ namespace PhoneBook.UI.WebMVC.Models.Tags
 {
         [StringLength(50, MinimumLength = 2)]
         public string Title { get; set; }
+        public List<Tag> tags { get; set; }
     }
 }
 

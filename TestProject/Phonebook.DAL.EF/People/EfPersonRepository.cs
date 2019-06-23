@@ -30,6 +30,7 @@ namespace Phonebook.DAL.EF.People
                 PersonId = Id
             };
             context.people.Remove(person);
+            context.SaveChanges();
 
         }
 

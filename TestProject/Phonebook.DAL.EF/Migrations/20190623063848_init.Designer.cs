@@ -10,8 +10,8 @@ using Phonebook.DAL.EF;
 namespace Phonebook.DAL.EF.Migrations
 {
     [DbContext(typeof(PhoneBookContext))]
-    [Migration("20190611113017_initandConfiguration")]
-    partial class initandConfiguration
+    [Migration("20190623063848_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
