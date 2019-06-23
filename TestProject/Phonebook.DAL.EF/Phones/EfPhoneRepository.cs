@@ -29,6 +29,7 @@ namespace Phonebook.DAL.EF.Phones
                 phoneId = Id
             };
             Context.phones.Remove(phones);
+            Context.SaveChanges();
         }
 
         public Phone Get(int Id)

@@ -1,4 +1,5 @@
-﻿using Phonbook.Core.Contracts.People;
+﻿using Microsoft.EntityFrameworkCore;
+using Phonbook.Core.Contracts.People;
 using PhoneBook.Core.Entites.People;
 using System;
 using System.Collections.Generic;
@@ -29,7 +30,8 @@ namespace Phonebook.DAL.EF.People
             {
                 PersonId = Id
             };
-            context.people.Remove(person);
+            //context.people.Remove(person);
+            context.people.Remove((Get(Id)));
             context.SaveChanges();
 
         }
@@ -43,6 +45,12 @@ namespace Phonebook.DAL.EF.People
         public List<Person> GetAll()
         {
             return context.people.ToList();
+        }
+
+        public Person GetPersonWithPhoneList(int Id)
+        {
+            var Person = context.people.Where(c => c.PersonId == Id).Include(c => c.phones).FirstOrDefault();
+            return context.people.Where(c => c.PersonId == Id).Include(c => c.phones).FirstOrDefault(); 
         }
     }
 }
