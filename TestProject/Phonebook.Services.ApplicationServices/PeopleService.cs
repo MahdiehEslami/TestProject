@@ -21,7 +21,7 @@ namespace Phonebook.Services.ApplicationServices
 
         public Person GetPersonWithPhoneList(int Id)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); 
             //return personRepo.Get(Id).phones.Exists()
             //.Include(c => c.phones).FirstOrDefault();
         }
