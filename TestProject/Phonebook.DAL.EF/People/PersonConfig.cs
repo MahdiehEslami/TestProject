@@ -16,6 +16,7 @@ namespace Phonebook.DAL.EF.People
             builder.Property(c => c.Email).HasMaxLength(256).IsUnicode(false).IsRequired();
             builder.Property(c => c.Address).HasMaxLength(500);
             builder.Property(c => c.Image).IsUnicode();
+            builder.Property(c => c.Status).IsRequired().HasDefaultValue(value: 1);
 
         }
     }

@@ -26,10 +26,10 @@ namespace Phonebook.DAL.EF.People
 
         public void Delete(int Id)
         {
-            Person person = new Person
-            {
-                PersonId = Id
-            };
+            //Person person = new Person
+            //{
+            //    PersonId = Id
+            //};
             //context.people.Remove(person);
             context.people.Remove((Get(Id)));
             context.SaveChanges();
@@ -49,7 +49,7 @@ namespace Phonebook.DAL.EF.People
 
         public Person GetPersonWithPhoneList(int Id)
         {
-            var Person = context.people.Where(c => c.PersonId == Id).Include(c => c.phones).FirstOrDefault();
+            //var Person = context.people.Where(c => c.PersonId == Id).Include(c => c.phones).FirstOrDefault();
             return context.people.Where(c => c.PersonId == Id).Include(c => c.phones).FirstOrDefault(); 
         }
     }

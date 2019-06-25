@@ -33,6 +33,7 @@ namespace PhoneBook.UI.WebMVC
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseDeveloperExceptionPage();
+            app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {

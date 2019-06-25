@@ -15,5 +15,6 @@ namespace PhoneBook.Core.Entites.People
         public string Image { get; set; }
         public List<Phone> phones { get; set; }
         public List<PersonTag> tags { get; set; }
+        public bool Status { get; set; }
     }
 }
