@@ -19,13 +19,13 @@ namespace PhoneBook.UI.WebMVC.Controllers
     {
         private readonly IPersonRepository PersonRepo;
         private readonly ITagRepository TagRepo;
+        private readonly IPeopleService PersonService;
 
-
-        public PeopleController(IPersonRepository personRepository,ITagRepository tagRepository)
+        public PeopleController(IPersonRepository personRepository,ITagRepository tagRepository,IPeopleService peopleService)
         {
             PersonRepo = personRepository;
             TagRepo = tagRepository;
-
+            PersonService = peopleService;
         }
 
         public IActionResult List()
@@ -99,7 +99,7 @@ namespace PhoneBook.UI.WebMVC.Controllers
 
         public IActionResult Delete([FromRoute]int Id)
         {
-            PersonRepo.Delete(Id);
+            PersonService.DeletePerson(Id);
             return RedirectToAction("List");
         }
     }

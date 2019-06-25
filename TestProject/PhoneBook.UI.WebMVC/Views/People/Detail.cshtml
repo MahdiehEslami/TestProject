@@ -1,4 +1,4 @@
-﻿@model Person
+﻿ @model Person
 
 <h1>Detail Of Person @Model.PersonId</h1>
 
@@ -11,6 +11,24 @@
         <strong class="text-black-50 ">Full Name: </strong><span class="d-block mb-3">@Model.FirstName @Model.LastName</span>
         <strong class="text-black-50">Email: </strong><span class="d-block mb-3">@Model.Email</span>
         <strong class="text-black-50">Address: </strong><span class="d-block mb-3">@Model.Address</span>
+    </div>
+    <div>
+        <a class="btn btn-danger" data-toggle="modal" data-target="#myModal" style="width: 200px;">Delete</a>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+
+                <!-- Modal content-->
+                <div class="modal-content pl-2 pt-2">
+                    <label >Are you Shure?</label>
+                    <div class="modal-footer">
+                        <a  class="btn btn-success" asp-controller="People" asp-action="Delete" asp-route-Id="@Model.PersonId">Yes</a>
+                        <a class="btn btn-danger" data-dismiss="modal">No</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 <div class="mt-5">

@@ -13,6 +13,7 @@ using Phonebook.DAL.EF;
 using Phonebook.DAL.EF.People;
 using Phonebook.DAL.EF.Phones;
 using Phonebook.DAL.EF.Tags;
+using Phonebook.Services.ApplicationServices;
 
 namespace PhoneBook.UI.WebMVC
 {
@@ -27,6 +28,7 @@ namespace PhoneBook.UI.WebMVC
             services.AddScoped<IPersonRepository, EfPersonRepository>();
             services.AddScoped<ITagRepository, EfTagRepository>();
             services.AddScoped<IPhoneRepository, EfPhoneRepository>();
+            services.AddScoped<IPeopleService,PeopleService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
