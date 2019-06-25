@@ -2,6 +2,7 @@
 using PhoneBook.Core.Entites.Phones;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace PhoneBook.UI.WebMVC.Models.Phones
     public class AddPhoneViewModel
     {
         public int PersonId { get; set; }
+        [Required]
+        [MinLength(7),MaxLength(12)]
         public string Number { get; set; }
         public PhoneType Type { get; set; }
 

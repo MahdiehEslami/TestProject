@@ -11,8 +11,13 @@
         </div>
         <div class="form-group flex-grow-1">
             <label asp-for="Type"></label><br />
-            <select class="form-control" asp-for="Type" asp-items="@Model.PhoneTypes"></select>
+            <select class="form-control" asp-for="Type">
+                @foreach (var item in @Model.PhoneTypes)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                            }
+                </select>
+            </div>
         </div>
-    </div>
-    <input type="submit" class="btn btn-primary" value="save" />
-</form>
+        <input type="submit" class="btn btn-primary" value="save" />
+    </form>
