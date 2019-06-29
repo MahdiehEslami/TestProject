@@ -9,9 +9,13 @@ namespace Phonbook.Core.Contracts.People
     {
 
         Person Get(int Id);
+        Person GetByEmail(string email);
         List<Person> GetAll();
+        List<Person> GetActivePerson();
         void Delete(int Id);
         Person Add(Person person);
         Person GetPersonWithPhoneList(int Id);
+        void SaveChange();
+
     }
 }

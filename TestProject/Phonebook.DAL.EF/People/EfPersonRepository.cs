@@ -42,6 +42,16 @@ namespace Phonebook.DAL.EF.People
             return context.people.Find(Id);
         }
 
+        public Person GetByEmail(string email)
+        {
+            return context.people.Where(c => c.Email == email).FirstOrDefault();
+        }
+
+        public List<Person> GetActivePerson()
+        {
+            return context.people.Where(c => c.Status == true).ToList();
+        }
+
         public List<Person> GetAll()
         {
             return context.people.ToList();
@@ -52,5 +62,11 @@ namespace Phonebook.DAL.EF.People
             //var Person = context.people.Where(c => c.PersonId == Id).Include(c => c.phones).FirstOrDefault();
             return context.people.Where(c => c.PersonId == Id).Include(c => c.phones).FirstOrDefault(); 
         }
+
+        public void SaveChange()
+        {
+            context.SaveChanges();
+        }
+
     }
 }

@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Phonbook.Core.Contracts.People
 {
-   public interface IPeopleService
+   public interface IPersonService
     {
-        Person GetPersonWithPhoneList(int Id);
+        //Person GetPersonWithPhoneList(int Id);
         void DeletePerson(int Id);
-       // Person AddPersonWithUniqEmail(Person person, String Email);
+        bool CheckUniqeEmail(string email);
     }
 }

@@ -28,7 +28,7 @@ namespace PhoneBook.UI.WebMVC
             services.AddScoped<IPersonRepository, EfPersonRepository>();
             services.AddScoped<ITagRepository, EfTagRepository>();
             services.AddScoped<IPhoneRepository, EfPhoneRepository>();
-            services.AddScoped<IPeopleService,PeopleService>();
+            services.AddScoped<IPersonService,PersonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

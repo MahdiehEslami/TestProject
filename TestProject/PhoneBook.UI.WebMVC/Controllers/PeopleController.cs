@@ -19,9 +19,9 @@ namespace PhoneBook.UI.WebMVC.Controllers
     {
         private readonly IPersonRepository PersonRepo;
         private readonly ITagRepository TagRepo;
-        private readonly IPeopleService PersonService;
+        private readonly IPersonService PersonService;
 
-        public PeopleController(IPersonRepository personRepository,ITagRepository tagRepository,IPeopleService peopleService)
+        public PeopleController(IPersonRepository personRepository,ITagRepository tagRepository,IPersonService peopleService)
         {
             PersonRepo = personRepository;
             TagRepo = tagRepository;
@@ -30,14 +30,14 @@ namespace PhoneBook.UI.WebMVC.Controllers
 
         public IActionResult List()
         {
-            List<Person> person = PersonRepo.GetAll().ToList();
+            List<Person> person = PersonRepo.GetActivePerson();
             return View(person);
         }
 
         public IActionResult Add()
         {
             AddPersonDisplayViewModel model = new AddPersonDisplayViewModel();
-            model.TagForDisplay = TagRepo.GetAll().ToList();
+            model.TagForDisplay = TagRepo.GetAll();
             return View(model);
         }
 
@@ -46,31 +46,40 @@ namespace PhoneBook.UI.WebMVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                Person person = new Person
+                if (PersonService.CheckUniqeEmail(model.Email))
                 {
-                    FirstName = model.FirstName,
-                    LastName = model.LastName,
-                    Email = model.Email,
-                    Address = model.Address,
-                    tags = new List<PersonTag>(model.SelectedTag.Select(c => new PersonTag
-                    {
-                        TagId = c
-                    }).ToList())
 
-                };
-                if (model?.Image?.Length > 0)
-                {
-                    using (var ms = new MemoryStream())
+
+                    Person person = new Person
                     {
-                        model.Image.CopyTo(ms);
-                        var fileByte = ms.ToArray();
-                        person.Image = Convert.ToBase64String(fileByte);
+                        FirstName = model.FirstName,
+                        LastName = model.LastName,
+                        Email = model.Email,
+                        Address = model.Address,
+                        tags = new List<PersonTag>(model.SelectedTag.Select(c => new PersonTag
+                        {
+                            TagId = c
+                        }).ToList())
+
+                    };
+                    if (model?.Image?.Length > 0)
+                    {
+                        using (var ms = new MemoryStream())
+                        {
+                            model.Image.CopyTo(ms);
+                            var fileByte = ms.ToArray();
+                            person.Image = Convert.ToBase64String(fileByte);
+                        }
                     }
-                }
 
-               
-                PersonRepo.Add(person);
-                return RedirectToAction("List");
+
+                    PersonRepo.Add(person);
+                    return RedirectToAction("List");
+                }
+                else
+                {
+                    //this Email in not Available,please change by another email;
+                }
             }
 
             List<Tag> oldTagfind = new List<Tag>();
@@ -87,7 +96,7 @@ namespace PhoneBook.UI.WebMVC.Controllers
                 Email = model.Email,
                 oldTag = oldTagfind
             };
-            displayViewModel.TagForDisplay = TagRepo.GetAll().ToList();
+            displayViewModel.TagForDisplay = TagRepo.GetAll();
             return View(displayViewModel);
         }
 
