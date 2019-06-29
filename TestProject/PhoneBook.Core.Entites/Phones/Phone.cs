@@ -9,5 +9,6 @@ namespace PhoneBook.Core.Entites.Phones
         public int phoneId { get; set; }
         public string  phoneNumber { get; set; }
         public PhoneType PhoneType { get; set; }
+      
     }
 }

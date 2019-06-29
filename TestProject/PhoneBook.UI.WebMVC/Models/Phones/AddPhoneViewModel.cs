@@ -23,12 +23,12 @@ namespace PhoneBook.UI.WebMVC.Models.Phones
             PhoneTypes = new List<SelectListItem>();
             PhoneTypes.Add(new SelectListItem
             {
-                Value = ((int)PhoneType.Home).ToString(),
+                Value =((int)PhoneType.Home).ToString(),
                 Text = PhoneType.Home.ToString()
             });
             PhoneTypes.Add(new SelectListItem
             {
-                Value = ((int)PhoneType.Mobile).ToString(),
+                Value =((int)PhoneType.Mobile).ToString(),
                 Text = PhoneType.Mobile.ToString()
             });
             PhoneTypes.Add(new SelectListItem
@@ -38,7 +38,7 @@ namespace PhoneBook.UI.WebMVC.Models.Phones
             });
             PhoneTypes.Add(new SelectListItem
             {
-                Value = ((int)PhoneType.Other).ToString(),
+                Value =((int)PhoneType.Other).ToString(),
                 Text = PhoneType.Other.ToString()
             });
         }
