@@ -38,9 +38,18 @@ namespace PhoneBook.UI.WebMVC
             services.AddScoped<IPersonRepository, EfPersonRepository>();
             services.AddScoped<ITagRepository, EfTagRepository>();
             services.AddScoped<IPhoneRepository, EfPhoneRepository>();
-            services.AddScoped<IPersonService,PersonService>();
-            services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<UserDbContext>();
+            services.AddScoped<IPersonService, PersonService>();
             services.AddDbContext<UserDbContext>(c => c.UseSqlServer(configuration.GetConnectionString("AAA")));
+            services.AddIdentity<AppUser, IdentityRole>(c =>
+            {
+                c.Password.RequireDigit = false;
+                c.Password.RequiredLength = 6;
+                c.Password.RequireUppercase = false;
+                c.Password.RequireNonAlphanumeric = false;
+                c.Password.RequiredUniqueChars = 1;
+                c.Password.RequireLowercase = false;
+            }).AddEntityFrameworkStores<UserDbContext>();
+            services.AddScoped<IPasswordValidator<AppUser>, MyPasswordValidator>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
