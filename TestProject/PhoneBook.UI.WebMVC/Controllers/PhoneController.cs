@@ -34,14 +34,14 @@ namespace PhoneBook.UI.WebMVC.Controllers
             {
                 Phone phone = new Phone
                 {
-                   PersonId=id,
+                   
                     phoneNumber = model.Number,
                     PhoneType = model.Type,
-                   
+                    phoneId=id
                 };
                 PhoneRepo.Add(phone);
-                //return RedirectToAction("Detail", "People",id);
-                return RedirectToAction("add");
+                return RedirectToAction("Detail", "People");
+                
             }
             else
                 return View(model);

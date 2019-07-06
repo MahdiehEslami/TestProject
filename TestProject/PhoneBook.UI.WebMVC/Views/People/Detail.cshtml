@@ -35,7 +35,7 @@
     <h2> Phones of person @Model.PersonId</h2>
     <table class="table table-bordered table-striped">
         <tr>
-            @*<th>Row</th>*@
+            <th>Row</th>
             <th>Type</th>
             <th>Number</th>
         </tr>
@@ -44,7 +44,7 @@
             @foreach (var item in Model.phones)
             {
                 <tr>
-                    @*<td>@item.phoneId</td>*@
+                    <td>@item.phoneId</td>
                     <td>@item.PhoneType</td>
                     <td>@item.phoneNumber</td>
                 </tr>
