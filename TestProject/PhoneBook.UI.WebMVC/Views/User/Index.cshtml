@@ -1,0 +1,31 @@
+﻿@model List<PhoneBook.UI.WebMVC.Models.AAA.AppUser>
+
+    <table class="table table-bordered table-striped">
+        <tr>
+
+            <th>UserName</th>
+            <th>Email</th>
+            <th>Command</th>
+        </tr>
+
+        @if (Model?.Any() == true)
+
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.UserName</td>
+                    <td>@item.Email</td>
+                    <td><a asp-action="Update" asp-controller="User">Update</a>
+                    |
+                    <a asp-action="Delete" asp-controller="User">Delete</a></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr><td colspan="3">User Not Found</td></tr>
+                }
+
+
+        </table>
