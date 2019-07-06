@@ -40,7 +40,7 @@ namespace PhoneBook.UI.WebMVC.Controllers
                    
                 };
                 PhoneRepo.Add(phone);
-                //return RedirectToAction("Detail", "People",id);
+                  //return RedirectToAction("Detail", "People",id);
                 return RedirectToAction("add");
             }
             else
