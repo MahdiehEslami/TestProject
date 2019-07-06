@@ -57,5 +57,71 @@ namespace PhoneBook.UI.WebMVC.Controllers
         }
 
 
+        public IActionResult Delete(string Id)
+        {
+            var user = userManager.FindByIdAsync(Id).Result;
+            if (user != null)
+            {
+                var result = userManager.DeleteAsync(user).Result;
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError(item.Code, item.Description);
+                    }
+                }
+            }
+            return NotFound();
+
+        }
+
+        public IActionResult Update(string Id)
+        {
+            var user = userManager.FindByIdAsync(Id).Result;
+            if (user != null)
+            {
+                CreateUserViewModel model = new CreateUserViewModel
+                {
+                    UserName=user.UserName,
+                    Email = user.Email
+                };
+                return View(model);
+            }
+            return NotFound();
+        }
+
+        [HttpPut]
+        public IActionResult Update(string Id, CreateUserViewModel model)
+        {
+            var user = userManager.FindByIdAsync(Id).Result;
+            if (user != null)
+            {
+                user.Email = model.Email;
+                user.UserName = model.UserName;
+                var result = userManager.UpdateAsync(user).Result;
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError(item.Code, item.Description);
+                    }
+                    return View(model);
+                }
+
+            }
+            return NotFound();
+        }
+
     }
+
+
 }
+

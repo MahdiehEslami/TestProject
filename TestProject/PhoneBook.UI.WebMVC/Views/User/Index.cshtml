@@ -16,9 +16,10 @@
                 <tr>
                     <td>@item.UserName</td>
                     <td>@item.Email</td>
-                    <td><a asp-action="Update" asp-controller="User">Update</a>
+                    <td>
+                    <a asp-action="Update" asp-controller="User" asp-route-id="@item.Id">Update</a>
                     |
-                    <a asp-action="Delete" asp-controller="User">Delete</a></td>
+                    <a asp-action="Delete" asp-controller="User" asp-route-id="@item.Id">Delete</a></td>
                 </tr>
             }
         }
