@@ -29,6 +29,12 @@ namespace PhoneBook.UI.WebMVC.Models.AAA
 
     public class MyPasswordValidatorFull : PasswordValidator<AppUser>
     {
+        private readonly UserDbContext Usercontext;
+
+        public MyPasswordValidatorFull(UserDbContext  context)
+        {
+            Usercontext = context;
+        }
         public override Task<IdentityResult> ValidateAsync(UserManager<AppUser> manager, AppUser user, string password)
         {
             var parentResult= base.ValidateAsync(manager, user, password).Result;
@@ -45,7 +51,14 @@ namespace PhoneBook.UI.WebMVC.Models.AAA
                     Description = "pasword is equal to user"
                 });
             }
-            //if ...
+            if (Usercontext.BadPasswords.Any(c=>c.Password==password))
+            {
+                errors.Add(new IdentityError
+                {
+                    Code = "BadPassword",
+                    Description = "Passsword is a BadPassword"
+                });
+            }
             return Task.FromResult(errors.Any() ?
                 IdentityResult.Failed(errors.ToArray()) :
                 IdentityResult.Success

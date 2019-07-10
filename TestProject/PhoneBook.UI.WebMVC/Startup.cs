@@ -41,16 +41,18 @@ namespace PhoneBook.UI.WebMVC
             services.AddScoped<IPersonService, PersonService>();
             services.AddDbContext<UserDbContext>(c => c.UseSqlServer(configuration.GetConnectionString("AAA")));
 
-
-            services.AddScoped<IPasswordValidator<AppUser>, MyPasswordValidator>();
+            services.AddScoped<IUserValidator<AppUser>, MyUserValidator>();
+            services.AddScoped<IPasswordValidator<AppUser>, MyPasswordValidatorFull>();
             services.AddIdentity<AppUser, IdentityRole>(c =>
             {
-                //c.Password.RequireDigit = false;
-                //c.Password.RequiredLength = 6;
-                //c.Password.RequireUppercase = false;
-                //c.Password.RequireNonAlphanumeric = false;
-                //c.Password.RequiredUniqueChars = 1;
-                //c.Password.RequireLowercase = false;
+                //c.User.AllowedUserNameCharacters = "jdjd";
+                c.User.RequireUniqueEmail = true;
+                c.Password.RequireDigit = false;
+                c.Password.RequiredLength = 6;
+                c.Password.RequireUppercase = false;
+                c.Password.RequireNonAlphanumeric = false;
+                c.Password.RequiredUniqueChars = 1;
+                c.Password.RequireLowercase = false;
             }).AddEntityFrameworkStores<UserDbContext>();
             
         }
