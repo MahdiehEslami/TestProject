@@ -84,7 +84,7 @@ namespace PhoneBook.UI.WebMVC.Controllers
             var user = userManager.FindByIdAsync(Id).Result;
             if (user != null)
             {
-                CreateUserViewModel model = new CreateUserViewModel
+                UpdateUserViewModel model = new UpdateUserViewModel
                 {
                     UserName=user.UserName,
                     Email = user.Email
@@ -94,8 +94,8 @@ namespace PhoneBook.UI.WebMVC.Controllers
             return NotFound();
         }
 
-        [HttpPut]
-        public IActionResult Update(string Id, CreateUserViewModel model)
+        [HttpPost]
+        public IActionResult Update(string Id, UpdateUserViewModel model)
         {
             var user = userManager.FindByIdAsync(Id).Result;
             if (user != null)
@@ -113,9 +113,8 @@ namespace PhoneBook.UI.WebMVC.Controllers
                     {
                         ModelState.AddModelError(item.Code, item.Description);
                     }
-                    return View(model);
                 }
-
+                return View(model);
             }
             return NotFound();
         }

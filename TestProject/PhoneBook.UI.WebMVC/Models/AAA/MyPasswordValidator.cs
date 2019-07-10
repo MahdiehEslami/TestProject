@@ -19,13 +19,39 @@ namespace PhoneBook.UI.WebMVC.Models.AAA
                     Code = "Password",
                     Description = "pasword is equal to user"
                 });
-
-
             }
             return Task.FromResult(errors.Any() ?
                    IdentityResult.Failed(errors.ToArray()) :
                    IdentityResult.Success);
         }
 
+    }
+
+    public class MyPasswordValidatorFull : PasswordValidator<AppUser>
+    {
+        public override Task<IdentityResult> ValidateAsync(UserManager<AppUser> manager, AppUser user, string password)
+        {
+            var parentResult= base.ValidateAsync(manager, user, password).Result;
+            List<IdentityError> errors = new List<IdentityError>();
+            if (!parentResult.Succeeded)
+            {
+                errors = parentResult.Errors.ToList();
+            }
+            if (user.UserName == password || user.UserName.Contains(password))
+            {
+                errors.Add(new IdentityError
+                {
+                    Code = "Password",
+                    Description = "pasword is equal to user"
+                });
+            }
+            //if ...
+            return Task.FromResult(errors.Any() ?
+                IdentityResult.Failed(errors.ToArray()) :
+                IdentityResult.Success
+                );
+
+        }
+        
     }
 }
