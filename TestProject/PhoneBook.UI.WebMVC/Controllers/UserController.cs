@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PhoneBook.UI.WebMVC.Models.AAA;
@@ -10,6 +11,7 @@ using PhoneBook.UI.WebMVC.Models.AAA;
 
 namespace PhoneBook.UI.WebMVC.Controllers
 {
+    [Authorize]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> userManager;
