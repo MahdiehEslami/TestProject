@@ -9,6 +9,7 @@ namespace PhoneBook.UI.WebMVC.Models.AAA
     public class LoginViewModel
     {
         [Required]
+        [Display(Name ="UserName/Email")]
         public string UserName { get; set; }
 
         [Required]
