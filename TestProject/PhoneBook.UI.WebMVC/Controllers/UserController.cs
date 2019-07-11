@@ -11,7 +11,7 @@ using PhoneBook.UI.WebMVC.Models.AAA;
 
 namespace PhoneBook.UI.WebMVC.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> userManager;
