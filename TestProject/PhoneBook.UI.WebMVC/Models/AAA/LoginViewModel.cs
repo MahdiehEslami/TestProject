@@ -16,6 +16,6 @@ namespace PhoneBook.UI.WebMVC.Models.AAA
         [UIHint("Password")]
         public string Password { get; set; }
 
-        public string ReturnUrl { get; set; } = "/";
+        public string ReturnUrl { get; set; }
     }
 }

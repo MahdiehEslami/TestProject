@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Phonbook.Core.Contracts.People;
 using Phonbook.Core.Contracts.Phones;
@@ -15,6 +16,7 @@ using PhoneBook.UI.WebMVC.Models.People;
 
 namespace PhoneBook.UI.WebMVC.Controllers
 {
+    [Authorize]
     public class PeopleController : Controller
     {
         private readonly IPersonRepository PersonRepo;

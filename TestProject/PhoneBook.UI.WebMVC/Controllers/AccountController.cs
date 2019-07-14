@@ -15,17 +15,18 @@ namespace PhoneBook.UI.WebMVC.Controllers
         private readonly UserManager<AppUser> manager;
         private readonly SignInManager<AppUser> signInManager;
 
-        public AccountController(UserManager<AppUser> manager,SignInManager<AppUser> signInManager)
+        public AccountController(UserManager<AppUser> manager, SignInManager<AppUser> signInManager)
         {
             this.manager = manager;
             this.signInManager = signInManager;
         }
         // GET: /<controller>/
-        public ViewResult Login(string returnUrl)
+        public ViewResult Login(string ReturnUrl)
         {
+            TempData["ReturnUrl"] = ReturnUrl;
             return View(new LoginViewModel
             {
-                ReturnUrl = returnUrl
+                ReturnUrl = ReturnUrl
             });
 
             //LoginViewModel model = new LoginViewModel();
@@ -36,19 +37,22 @@ namespace PhoneBook.UI.WebMVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
+            string ReturnUrl = TempData["ReturnUrl"].ToString();
+
             if (ModelState.IsValid)
             {
                 AppUser user = await manager.FindByNameAsync(model.UserName);
                 if (user == null)
                 {
-                     user = manager.FindByEmailAsync(model.UserName).Result;
+                    user = manager.FindByEmailAsync(model.UserName).Result;
                 }
-                if (user!=null)
+                if (user != null)
                 {
                     await signInManager.SignOutAsync();
-                    if(( await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false)).Succeeded)
+                    if ((await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false)).Succeeded)
                     {
-                        return Redirect(model?.ReturnUrl ?? "/");
+                        //return Redirect(model?.ReturnUrl ?? "/");
+                        return Redirect(ReturnUrl ?? "/");
                     }
                 }
             }
@@ -56,10 +60,10 @@ namespace PhoneBook.UI.WebMVC.Controllers
             return View(model);
         }
 
-        public async Task<RedirectResult> Logout(string returnUrl = "/")
+        public async Task<RedirectResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return Redirect(returnUrl);
+            return Redirect("/Home/Index");
         }
 
         public IActionResult AccessDenied()
