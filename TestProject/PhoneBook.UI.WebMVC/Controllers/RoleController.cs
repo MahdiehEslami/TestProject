@@ -25,6 +25,98 @@ namespace PhoneBook.UI.WebMVC.Controllers
             return View(roles);
         }
 
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(RoleViewModel roleView)
+        {
+            if (ModelState.IsValid)
+            {
+                AppRole role = new AppRole
+                {
+                   Name=roleView.RoleName
+                };
+                var result = roleManager.CreateAsync(role).Result;
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError(item.Code, item.Description);
+                    }
+                }
+            }
+
+            return View();
+        }
+
+        public IActionResult Delete(string Id)
+        {
+            var role = roleManager.FindByIdAsync(Id).Result;
+            if (role!=null)
+            {
+                var result = roleManager.DeleteAsync(role).Result;
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError(item.Code, item.Description);
+                    }
+                }
+            }
+            return NotFound();
+        }
+
+        public IActionResult Update(string Id)
+        {
+            var role = roleManager.FindByIdAsync(Id).Result;
+            if (role != null)
+            {
+                RoleViewModel model = new RoleViewModel
+                {
+                    RoleName = role.Name
+                };
+                return View(model);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpPost]
+        public IActionResult Update(string Id, RoleViewModel model)
+        {
+            var role = roleManager.FindByIdAsync(Id).Result;
+            if (role!=null)
+            {
+                role.Name = model.RoleName;
+                var result = roleManager.UpdateAsync(role).Result;
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError(item.Code, item.Description);
+                    }
+                }
+            }
+            return NotFound();
+        }
+
 
     }
 }

@@ -3,6 +3,7 @@
     <table class="table table-bordered table-striped">
         <tr>
             <td>Title</td>
+            <td>Action</td>
         </tr>
         @if (Model?.Any() == true)
         {
@@ -10,6 +11,11 @@
             {
                 <tr>
                     <td>@item.Name</td>
+                    <td>
+                     <a asp-action="Delete" asp-controller="Role" asp-route-id="@item.Id">Delete</a>
+                    |
+                     <a asp-action="Update" asp-controller="Role" asp-route-id="@item.Id">Edit</a>
+                    </td>
                 </tr>
             }
         }
